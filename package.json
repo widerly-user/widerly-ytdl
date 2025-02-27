@@ -2,7 +2,7 @@
   "name": "widerly-ytdl",
   "version": "1.0.0",
   "dependencies": {
-    "ytdl-core": "^4.11.5"
+    "ytdl-core": "latest"
   },
   "engines": {
     "node": "18.x"
