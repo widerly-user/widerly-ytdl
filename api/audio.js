@@ -1,9 +1,7 @@
-const express = require('express');
 const ytdl = require('ytdl-core');
-const app = express();
 
-app.get('/audio', async (req, res) => {
-    const url = req.query.url;
+module.exports = async (req, res) => {
+    const { url } = req.query;
     if (!url || !ytdl.validateURL(url)) {
         return res.status(400).json({ error: 'Invalid YouTube URL' });
     }
@@ -14,11 +12,9 @@ app.get('/audio', async (req, res) => {
         if (!audioFormat) {
             throw new Error('No audio format available');
         }
-        res.json({ url: audioFormat.url });
+        res.status(200).json({ url: audioFormat.url });
     } catch (error) {
-        console.error('Error fetching audio:', error);
+        console.error('Error:', error);
         res.status(500).json({ error: 'Failed to fetch audio' });
     }
-});
-
-module.exports = app;
+};
